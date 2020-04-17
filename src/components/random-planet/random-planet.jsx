@@ -1,8 +1,9 @@
 import React, {PureComponent} from 'react';
 import './random-planet.css';
-import Spinner from '../spinner/spinner';
 
 import ApiService from '../../services/api-service';
+import Spinner from '../spinner/spinner';
+import ErrorIndicator from '../error-indicator/error-indicator';
 
 export default class RandomPlanet extends PureComponent {
 
@@ -13,12 +14,17 @@ export default class RandomPlanet extends PureComponent {
       id: 2,
     },
     loading: true,
+    error: false,
   };
 
   componentDidMount() {
-    this._updatePlanet(Math.floor(Math.random() * 20)  + 2);
+    const id = Math.floor(Math.random() * 20)  + 2;
+    this._updatePlanet(id);
   }
 
+  _onError = () => {
+    this.setState({error: true, loading: false});
+  };
 
   _onPlanetLoaded = (planet) => {
     this.setState({planet, loading: false});
@@ -27,17 +33,22 @@ export default class RandomPlanet extends PureComponent {
   _updatePlanet(id) {
     this._apiService
       .getPlanet(id)
-      .then(this._onPlanetLoaded);
+      .then(this._onPlanetLoaded)
+      .catch(this._onError);
   }
 
   render() {
-    const {planet, loading} = this.state;
+    const {planet, loading, error} = this.state;
+    const hasData = !(loading || error);
+
     const spinner = loading ? <Spinner /> : null;
-    const content = !loading ? <PlanetView {...planet}/> : null;
+    const errorMessage = error ? <ErrorIndicator /> : null;
+    const content = hasData ? <PlanetView {...planet}/> : null;
 
     return (
       <div className="random-planet jumbotron rounded">
         {spinner}
+        {errorMessage}
         {content}
       </div>
     );
