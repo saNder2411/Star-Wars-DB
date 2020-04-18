@@ -51,7 +51,7 @@ export default class ApiService {
     return item.url.match(idRegExp)[1];
   }
 
-  _transformPlanet(planet) {
+  _transformPlanet = (planet) => {
     return {
       id: this._extractId(planet),
       name: planet.name,
@@ -59,9 +59,9 @@ export default class ApiService {
       rotationPeriod: planet.rotation_period,
       diameter: planet.diameter,
     };
-  }
+  };
 
-  _transformStarship(starship) {
+  _transformStarship = (starship) => {
     return {
       id: this._extractId(starship),
       name: starship.name,
@@ -73,9 +73,9 @@ export default class ApiService {
       passengers: starship.passengers,
       cargoCapacity: starship.cargo_capacity,
     };
-  }
+  };
 
-  _transformPerson(person) {
+  _transformPerson = (person) => {
     return {
       id: this._extractId(person),
       name: person.name,
@@ -83,5 +83,5 @@ export default class ApiService {
       birthYear: person.birth_year,
       eyeColor: person.eye_color,
     };
-  }
+  };
 }

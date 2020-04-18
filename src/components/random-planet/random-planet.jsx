@@ -2,12 +2,12 @@ import React, {PureComponent} from 'react';
 import './random-planet.css';
 
 import ApiService from '../../services/api-service';
-import Spinner from '../spinner/spinner';
-import ErrorIndicator from '../error-indicator/error-indicator';
+import {getContent} from '../../utils/utils';
 
 export default class RandomPlanet extends PureComponent {
 
   _apiService = new ApiService();
+  _interval = null;
 
   state = {
     planet: {
@@ -18,8 +18,12 @@ export default class RandomPlanet extends PureComponent {
   };
 
   componentDidMount() {
-    const id = Math.floor(Math.random() * 20)  + 2;
-    this._updatePlanet(id);
+    this._updatePlanet();
+    this._interval = setInterval(this._updatePlanet, 30000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._interval);
   }
 
   _onError = () => {
@@ -30,7 +34,8 @@ export default class RandomPlanet extends PureComponent {
     this.setState({planet, loading: false});
   };
 
-  _updatePlanet(id) {
+  _updatePlanet = () => {
+    const id = Math.floor(Math.random() * 19)  + 2;
     this._apiService
       .getPlanet(id)
       .then(this._onPlanetLoaded)
@@ -39,16 +44,10 @@ export default class RandomPlanet extends PureComponent {
 
   render() {
     const {planet, loading, error} = this.state;
-    const hasData = !(loading || error);
-
-    const spinner = loading ? <Spinner /> : null;
-    const errorMessage = error ? <ErrorIndicator /> : null;
-    const content = hasData ? <PlanetView {...planet}/> : null;
+    const content = getContent(loading, error, PlanetView, planet);
 
     return (
       <div className="random-planet jumbotron rounded">
-        {spinner}
-        {errorMessage}
         {content}
       </div>
     );
@@ -63,7 +62,7 @@ const PlanetView = ({id, name, population, rotationPeriod, diameter}) => {
               alt="random planet"/>
       <div>
         <h4>{name}</h4>
-        <ul className="list-group list-group-flush">
+        <ul className="list-group">
           <li className="list-group-item">
             <span className="term">Population</span>
             <span>{population}</span>
