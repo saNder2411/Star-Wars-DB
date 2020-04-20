@@ -3,6 +3,7 @@ import './person-details.css';
 
 import ApiService from '../../services/api-service';
 import {getContent} from '../../utils/utils';
+import ErrorButton from '../error-button/error-button';
 
 export default class PersonDetails extends PureComponent {
 
@@ -53,7 +54,7 @@ export default class PersonDetails extends PureComponent {
       );
     }
 
-    const content = getContent(loading, error, PersonDetailsView, person);
+    const content = getContent(loading, error, React.memo(PersonDetailsView), person);
 
     return (
       <div className="person-details card">
@@ -88,6 +89,7 @@ const PersonDetailsView = ({id, name, gender, birthYear, eyeColor}) => {
             <span>{eyeColor}</span>
           </li>
         </ul>
+        <ErrorButton />
       </div>
     </React.Fragment>
   );
