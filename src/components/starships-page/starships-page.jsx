@@ -1,21 +1,21 @@
 import React, {PureComponent} from 'react';
-import './people-page.css';
+import './starships-page.css';
 
 import Row from '../row/row';
 import ItemList from '../item-list/item-list';
 import ItemDetails, {ItemField} from '../item-details/item-details';
 import ErrorBoundary from '../error-boundary/error-boundary';
 
-export default class PeoplePage extends PureComponent {
+export default class StarshipsPage extends PureComponent {
 
-  state = {selectedPerson: null};
+  state = {selectedStarship: null};
 
-  _handlePersonSelected = (id) => {
-    this.setState({selectedPerson: id});
+  _handleStarshipSelected = (id) => {
+    this.setState({selectedStarship: id});
   };
 
   render() {
-    const {selectedPerson} = this.state;
+    const {selectedStarship} = this.state;
     const {getItemListData, getItemDetailsData, getItemImageUrl} = this.props;
 
     return (
@@ -23,9 +23,9 @@ export default class PeoplePage extends PureComponent {
         <ErrorBoundary>
           <ItemList
             getItemListData={getItemListData}
-            onItemSelected={this._handlePersonSelected}>
+            onItemSelected={this._handleStarshipSelected}>
 
-            {(it) => `${it.name} (Birth Year: ${it.birthYear})`}
+            {(it) => `${it.name} (Model: ${it.model})`}
 
           </ItemList>
         </ErrorBoundary>
@@ -33,11 +33,11 @@ export default class PeoplePage extends PureComponent {
           <ItemDetails
             getItemImageUrl={getItemImageUrl}
             getItemDetailsData={getItemDetailsData}
-            itemId={selectedPerson}>
+            itemId={selectedStarship}>
 
-            <ItemField field="gender" label="Gender" />
-            <ItemField field="birthYear" label="Birth Year" />
-            <ItemField field="eyeColor" label="Eye Color" />
+            <ItemField field="model" label="Model" />
+            <ItemField field="length" label="Length" />
+            <ItemField field="costInCredits" label="Cost" />
 
           </ItemDetails>
         </ErrorBoundary>

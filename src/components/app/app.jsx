@@ -6,8 +6,12 @@ import RandomPlanet from '../random-planet/random-planet';
 import ErrorButton from '../error-button/error-button';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import PeoplePage from '../people-page/people-page';
+import ApiService from '../../services/api-service';
+import StarshipsPage from '../starships-page/starships-page';
 
 export default class App extends PureComponent {
+
+  _apiService = new ApiService();
 
   state = {
     showRandomPlanet: true,
@@ -23,10 +27,17 @@ export default class App extends PureComponent {
   };
 
   render() {
-
     const {showRandomPlanet, hasError} = this.state;
     const planet = showRandomPlanet ? <RandomPlanet /> : null;
     const toggleTerm = showRandomPlanet ? `Off` : `On`;
+    const {
+      getAllPeople,
+      getAllStarships,
+      getPerson,
+      getStarship,
+      getPersonImage,
+      getStarshipImage,
+    } = this._apiService;
 
     if (hasError) {
       return <ErrorIndicator />
@@ -44,10 +55,15 @@ export default class App extends PureComponent {
           <ErrorButton />
         </div>
 
-        <PeoplePage />
-        <PeoplePage />
-        <PeoplePage />
+        <PeoplePage
+          getItemListData={getAllPeople}
+          getItemDetailsData={getPerson}
+          getItemImageUrl={getPersonImage} />
 
+        <StarshipsPage
+          getItemListData={getAllStarships}
+          getItemDetailsData={getStarship}
+          getItemImageUrl={getStarshipImage} />
       </div>
     );
   }

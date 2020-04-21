@@ -1,23 +1,21 @@
 import React, {PureComponent} from 'react';
 import './item-list.css';
 
-import ApiService from '../../services/api-service';
 import {getContent} from '../../utils/utils';
 
 export default class ItemList extends PureComponent {
 
-  _apiService = new ApiService();
-
   state = {
-    peopleList: null,
+    itemList: null,
     loading: true,
     error: false,
   };
 
   componentDidMount() {
-    this._apiService
-      .getAllPeople()
-      .then((peopleList) => this.setState({peopleList, loading: false}))
+
+    const {getItemListData} = this.props;
+    getItemListData()
+      .then((itemList) => this.setState({itemList, loading: false}))
       .catch(this._onError);
   }
 
@@ -25,20 +23,11 @@ export default class ItemList extends PureComponent {
     this.setState({error: true, loading: false});
   };
 
-  _renderItems(arr) {
-    return arr.map(({id, name}) => (
-    <li className="list-group-item"
-        key={id}
-        onClick={() => this.props.onItemSelected(id)} >
-      {name}
-    </li>
-    ));
-  }
-
   render() {
-    const {peopleList, loading, error} = this.state;
-    const {onItemSelected} = this.props;
-    const itemListViewProps = {peopleList, onItemSelected};
+    const {itemList, loading, error} = this.state;
+    const {onItemSelected, children} = this.props;
+
+    const itemListViewProps = {itemList, onItemSelected, renderItem: children};
     const content = getContent(loading, error, ItemListView, itemListViewProps);
 
     return (
@@ -51,15 +40,18 @@ export default class ItemList extends PureComponent {
 
 
 
-const ItemListView = ({peopleList, onItemSelected}) => {
+const ItemListView = ({itemList, onItemSelected, renderItem}) => {
 
-  const items = peopleList.map(({id, name}) => (
-    <li className="list-group-item"
+  const items = itemList.map((item) => {
+    const {id} = item;
+    const label = renderItem(item)
+
+    return (<li className="list-group-item"
         key={id}
         onClick={() => onItemSelected(id)} >
-      {name}
-    </li>
-  ));
+      {label}
+    </li>);
+  });
 
   return (
     <ul className="item-list list-group">
