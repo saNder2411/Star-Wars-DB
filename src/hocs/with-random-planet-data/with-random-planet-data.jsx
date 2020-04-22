@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import {getContent} from '../../utils/utils';
+import withApiService from '../with-api-service/with-api-service';
 
-const withRandomPlanetData = (Component, getPlanetData, getImageUrl) => {
+const withRandomPlanetData = (Component) => {
   class WithRandomPlanetData extends PureComponent {
     _interval = null;
   
@@ -15,7 +16,7 @@ const withRandomPlanetData = (Component, getPlanetData, getImageUrl) => {
   
     componentDidMount() {
       this._updatePlanet();
-      this._interval = setInterval(this._updatePlanet, 10000);
+      this._interval = setInterval(this._updatePlanet, 20000);
     }
   
     componentWillUnmount() {
@@ -23,24 +24,15 @@ const withRandomPlanetData = (Component, getPlanetData, getImageUrl) => {
     }
 
     _updatePlanet = () => {
+      const {apiService: {getPlanet, getPlanetImage}} = this.props;
       const id = Math.floor(Math.random() * 19)  + 2;
 
-      getPlanetData(id)
-        .then(this._onPlanetLoaded)
-        .catch(this._onError);
-    };
-
-    _onPlanetLoaded = (data) => {
-      const imageUrl = getImageUrl(data);
-
-      this.setState({
-        data: {...data, imageUrl},
-        loading: false,
-      });
-    };
-
-    _onError = () => {
-      this.setState({error: true, loading: false});
+      getPlanet(id)
+        .then((data) => this.setState({
+            data: {...data, imageUrl: getPlanetImage(data)},
+            loading: false,
+          }))
+        .catch(() => this.setState({error: true, loading: false}));
     };
 
     render() {
@@ -56,7 +48,7 @@ const withRandomPlanetData = (Component, getPlanetData, getImageUrl) => {
     }
   }
 
-  return WithRandomPlanetData;
+  return withApiService(WithRandomPlanetData);
 };
 
 export default withRandomPlanetData;

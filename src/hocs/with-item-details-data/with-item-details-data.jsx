@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {getContent} from '../../utils/utils';
 
 
-const withItemDetailsData = (Component, getItemDetailsData, getItemImageUrl) => {
+const withItemDetailsData = (Component) => {
   class WithItemDetailsData extends PureComponent {
     state = {
       data: null,
@@ -22,29 +22,19 @@ const withItemDetailsData = (Component, getItemDetailsData, getItemImageUrl) => 
     }
   
     _updateItem() {
-      const {itemId} = this.props;
+      const {itemId, getItemDetailsData, getItemImageUrl} = this.props;
   
       if (itemId === null) {
         return;
       }
   
       getItemDetailsData(itemId)
-        .then(this._onItemLoaded)
-        .catch(this._onError);
+        .then((data) => this.setState({
+            data: {...data, imageUrl: getItemImageUrl(data)},
+            loading: false,
+          }))
+        .catch(() => this.setState({error: true, loading: false}));
     }
-
-    _onItemLoaded = (data) => {
-      const imageUrl = getItemImageUrl(data);
-    
-      this.setState({
-        data: {...data, imageUrl},
-        loading: false,
-      });
-    };
-  
-    _onError = () => {
-      this.setState({error: true, loading: false});
-    };
   
     render() {
       const {data, loading, error} = this.state;

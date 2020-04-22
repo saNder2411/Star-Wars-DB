@@ -4,7 +4,7 @@ import './people-page.css';
 import Row from '../row/row';
 import ErrorBoundary from '../error-boundary/error-boundary';
 import {PersonList} from '../wrapped-components/wrapped-item-list';
-import {PersonDetails} from '../wrapped-components/wrapped-item-details';
+import {WrappedPersonDetails} from '../wrapped-components/wrapped-item-details';
 
 
 
@@ -22,12 +22,10 @@ export default class PeoplePage extends PureComponent {
     return (
       <Row>
         <ErrorBoundary>
-          <PersonList onItemSelected={this._handlePersonSelected}>
-            {(it) => `${it.name} (Birth Year: ${it.birthYear})`}
-          </PersonList>
+          <PersonList onItemSelected={this._handlePersonSelected} />
         </ErrorBoundary>
         <ErrorBoundary>
-          <PersonDetails itemId={selectedPerson} />
+          <WrappedPersonDetails itemId={selectedPerson} />
         </ErrorBoundary>
       </Row>
     );

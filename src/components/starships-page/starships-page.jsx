@@ -4,7 +4,7 @@ import './starships-page.css';
 import Row from '../row/row';
 import ErrorBoundary from '../error-boundary/error-boundary';
 import {StarshipList} from '../wrapped-components/wrapped-item-list';
-import {StarshipDetails} from '../wrapped-components/wrapped-item-details';
+import {WrappedStarshipDetails} from '../wrapped-components/wrapped-item-details';
 
 
 export default class StarshipsPage extends PureComponent {
@@ -21,12 +21,10 @@ export default class StarshipsPage extends PureComponent {
     return (
       <Row>
         <ErrorBoundary>
-          <StarshipList onItemSelected={this._handleStarshipSelected}>
-            {(it) => `${it.name} (Model: ${it.model})`}
-          </StarshipList>
+          <StarshipList onItemSelected={this._handleStarshipSelected} />
         </ErrorBoundary>
         <ErrorBoundary>
-          <StarshipDetails itemId={selectedStarship} />
+          <WrappedStarshipDetails itemId={selectedStarship} />
         </ErrorBoundary>
       </Row>
     );
