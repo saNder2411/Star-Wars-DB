@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {getContent} from '../../utils/utils';
-import withApiService from '../with-api-service/with-api-service';
 
 const withRandomPlanetData = (Component) => {
   class WithRandomPlanetData extends PureComponent {
@@ -24,7 +23,7 @@ const withRandomPlanetData = (Component) => {
     }
 
     _updatePlanet = () => {
-      const {apiService: {getPlanet, getPlanetImage}} = this.props;
+      const {getPlanet, getPlanetImage} = this.props;
       const id = Math.floor(Math.random() * 19)  + 2;
 
       getPlanet(id)
@@ -48,7 +47,7 @@ const withRandomPlanetData = (Component) => {
     }
   }
 
-  return withApiService(WithRandomPlanetData);
+  return WithRandomPlanetData;
 };
 
 export default withRandomPlanetData;

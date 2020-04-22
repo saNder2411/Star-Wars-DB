@@ -27,7 +27,7 @@ const ItemDetails = ({data, children}) => {
 
 const ItemField = ({data, field, label}) => {
   return (
-    <li className="list-group-item">
+    <li className="list-group-item d-flex justify-content-between align-items-center">
       <span className="term">{label}:</span>
       <span>{data[field]}</span>
     </li>

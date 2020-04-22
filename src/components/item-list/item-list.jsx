@@ -9,7 +9,7 @@ const ItemList = ({data, onItemSelected, children: renderLabel}) => {
     const label = renderLabel(item)
 
     return (
-      <li className="list-group-item"
+      <li className="list-group-item d-flex justify-content-between align-items-center"
           key={id}
           onClick={() => onItemSelected(id)} >
         {label}

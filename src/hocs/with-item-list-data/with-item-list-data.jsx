@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {getContent} from '../../utils/utils';
 
-const withItemListData = (Component, getData) => {
+const withItemListData = (Component) => {
   class WithItemListData extends PureComponent {
     state = {
       data: null,
@@ -10,7 +10,7 @@ const withItemListData = (Component, getData) => {
     };
   
     componentDidMount() {
-      getData()
+      this.props.getData()
         .then((data) => this.setState({data, loading: false}))
         .catch(() => this.setState({error: true, loading: false}));
     }

@@ -4,7 +4,7 @@ import './app.css';
 import ApiService from '../../services/api-service';
 import {ApiServiceProvider} from '../api-service-context/api-service-context';
 import Header from '../header/header';
-import {RandomPlanetDetails} from '../wrapped-components/wrapped-random-planet';
+import RandomPlanetDetails from '../api-components/random-planet-details';
 import ErrorButton from '../error-button/error-button';
 import ErrorIndicator from '../error-indicator/error-indicator';
 import PeoplePage from '../people-page/people-page';
