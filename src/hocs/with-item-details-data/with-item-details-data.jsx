@@ -15,8 +15,8 @@ const withItemDetailsData = (Component) => {
     }
   
     componentDidUpdate(prevProps) {
-      if (prevProps.itemId !== this.props.itemId) {
-        this.setState({loading: true});
+      if (prevProps.itemId !== this.props.itemId ||
+        prevProps.getItemDetailsData !== this.props.getItemDetailsData) {
         this._updateItem();
       }
     }
@@ -27,7 +27,8 @@ const withItemDetailsData = (Component) => {
       if (itemId === null) {
         return;
       }
-  
+
+      this.setState({error: false, loading: true});
       getItemDetailsData(itemId)
         .then((data) => this.setState({
             data: {...data, imageUrl: getItemImageUrl(data)},

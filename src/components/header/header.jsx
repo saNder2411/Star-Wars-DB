@@ -1,7 +1,7 @@
 import React from 'react';
 import './header.css';
 
-const Header = () => {
+const Header = ({onServiceChange}) => {
   return (
     <nav className="header d-flex navbar navbar-expand-lg navbar-dark bg-info">
       <a className="navbar-brand" href="/">Star Wars DB</a>
@@ -23,6 +23,9 @@ const Header = () => {
             <a className="nav-link" href="/starships">Starships</a>
           </li>
         </ul>
+        <button className="btn btn-success btn-sm" onClick={onServiceChange}>
+          Change Service
+        </button>
       </div>
     </nav>
   );

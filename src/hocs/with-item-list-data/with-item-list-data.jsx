@@ -10,6 +10,17 @@ const withItemListData = (Component) => {
     };
   
     componentDidMount() {
+      this._updateItemList();
+    }
+
+    componentDidUpdate(prevProps) {
+      if (prevProps.getData !== this.props.getData) {
+        this._updateItemList();
+      }
+    }
+
+    _updateItemList() {
+      this.setState({error: false, loading: true})
       this.props.getData()
         .then((data) => this.setState({data, loading: false}))
         .catch(() => this.setState({error: true, loading: false}));

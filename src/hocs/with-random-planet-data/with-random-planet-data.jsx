@@ -17,6 +17,13 @@ const withRandomPlanetData = (Component) => {
       this._updatePlanet();
       this._interval = setInterval(this._updatePlanet, 20000);
     }
+
+    componentDidUpdate(prevState) {
+      if (prevState.getPlanet !== this.props.getPlanet) {
+        this._updatePlanet();
+      }
+
+    }
   
     componentWillUnmount() {
       clearInterval(this._interval);
