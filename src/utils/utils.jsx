@@ -11,4 +11,4 @@ export const getContent = (loading, error, Component, props) => {
   const content = hasData ? <Component {...props}/> : null;
 
   return spinner || errorMessage || content;
-}
+};

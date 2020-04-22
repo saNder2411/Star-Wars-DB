@@ -2,9 +2,11 @@ import React, {PureComponent} from 'react';
 import './people-page.css';
 
 import Row from '../row/row';
-import ItemList from '../item-list/item-list';
-import ItemDetails, {ItemField} from '../item-details/item-details';
 import ErrorBoundary from '../error-boundary/error-boundary';
+import {PersonList} from '../wrapped-components/wrapped-item-list';
+import {PersonDetails} from '../wrapped-components/wrapped-item-details';
+
+
 
 export default class PeoplePage extends PureComponent {
 
@@ -16,32 +18,19 @@ export default class PeoplePage extends PureComponent {
 
   render() {
     const {selectedPerson} = this.state;
-    const {getItemListData, getItemDetailsData, getItemImageUrl} = this.props;
 
     return (
       <Row>
         <ErrorBoundary>
-          <ItemList
-            getItemListData={getItemListData}
-            onItemSelected={this._handlePersonSelected}>
-
+          <PersonList onItemSelected={this._handlePersonSelected}>
             {(it) => `${it.name} (Birth Year: ${it.birthYear})`}
-
-          </ItemList>
+          </PersonList>
         </ErrorBoundary>
         <ErrorBoundary>
-          <ItemDetails
-            getItemImageUrl={getItemImageUrl}
-            getItemDetailsData={getItemDetailsData}
-            itemId={selectedPerson}>
-
-            <ItemField field="gender" label="Gender" />
-            <ItemField field="birthYear" label="Birth Year" />
-            <ItemField field="eyeColor" label="Eye Color" />
-
-          </ItemDetails>
+          <PersonDetails itemId={selectedPerson} />
         </ErrorBoundary>
       </Row>
     );
   }
 }
+

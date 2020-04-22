@@ -1,75 +1,10 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import './item-details.css';
-
-import {getContent} from '../../utils/utils';
 import ErrorButton from '../error-button/error-button';
 
-export default class ItemDetails extends PureComponent {
 
-  state = {
-    item: null,
-    loading: true,
-    error: false,
-  };
-
-  componentDidMount() {
-    this._updateItem();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.itemId !== this.props.itemId) {
-      this.setState({loading: true});
-      this._updateItem();
-    }
-  }
-
-  _updateItem() {
-    const {itemId, getItemDetailsData, getItemImageUrl} = this.props;
-
-    if (itemId === null) {
-      return;
-    }
-
-    getItemDetailsData(itemId)
-      .then((item) => {
-        const imageUrl = getItemImageUrl(item);
-        this.setState({
-          item: {...item, imageUrl},
-          loading: false,
-        });
-      })
-      .catch(this._onError);
-  }
-
-  _onError = () => {
-    this.setState({error: true, loading: false});
-  };
-
-  render() {
-    const {item, loading, error} = this.state;
-    const {children} = this.props
-    const ItemDetailsViewProps = {item, children}
-
-    if (item === null) {
-      return (
-        <div className="person-details card">
-          <span>Selected a person from a list</span>
-        </div>
-      );
-    }
-
-    const content = getContent(loading, error, React.memo(ItemDetailsView), ItemDetailsViewProps);
-    return (
-      <div className="person-details card">
-        {content}
-      </div>
-    );
-  }
-}
-
-
-const ItemDetailsView = ({item, children}) => {
-  const {imageUrl, name} = item;
+const ItemDetails = ({data, children}) => {
+  const {imageUrl, name} = data;
 
   return (
     <React.Fragment>
@@ -82,7 +17,7 @@ const ItemDetailsView = ({item, children}) => {
         <ul className="list-group list-group-flush">
           {React
             .Children
-            .map(children, (child) => React.cloneElement(child, {item}))}
+            .map(children, (child) => React.cloneElement(child, {data}))}
         </ul>
         <ErrorButton />
       </div>
@@ -90,13 +25,14 @@ const ItemDetailsView = ({item, children}) => {
   );
 };
 
-const ItemField = ({item, field, label}) => {
+const ItemField = ({data, field, label}) => {
   return (
     <li className="list-group-item">
       <span className="term">{label}:</span>
-      <span>{item[field]}</span>
+      <span>{data[field]}</span>
     </li>
   );
 };
 
+export default ItemDetails;
 export {ItemField};
