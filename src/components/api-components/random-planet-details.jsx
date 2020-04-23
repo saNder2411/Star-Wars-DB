@@ -19,4 +19,4 @@ const RandomPlanetDetails = (props) => {
 const mapMethodsToProps = ({getPlanet, getPlanetImage}) => ({getPlanet, getPlanetImage});
 
 
-export default withApiService(RandomPlanetDetails, mapMethodsToProps);
+export default withApiService(mapMethodsToProps)(RandomPlanetDetails);

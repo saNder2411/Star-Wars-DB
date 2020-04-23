@@ -2,27 +2,31 @@ import React, {PureComponent} from 'react';
 import {getContent} from '../../utils/utils';
 
 const withRandomPlanetData = (Component) => {
+
   class WithRandomPlanetData extends PureComponent {
+
+    static defaultProps = {
+      updateInterval: 10000,
+    };
+
     _interval = null;
   
     state = {
-      data: {
-        id: 2,
-      },
+      data: null,
       loading: true,
       error: false,
     };
   
     componentDidMount() {
+      const {updateInterval} = this.props;
       this._updatePlanet();
-      this._interval = setInterval(this._updatePlanet, 20000);
+      this._interval = setInterval(this._updatePlanet, updateInterval);
     }
 
     componentDidUpdate(prevState) {
       if (prevState.getPlanet !== this.props.getPlanet) {
         this._updatePlanet();
       }
-
     }
   
     componentWillUnmount() {

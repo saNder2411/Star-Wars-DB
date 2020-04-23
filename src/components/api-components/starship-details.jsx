@@ -21,5 +21,5 @@ const mapMethodsToProps = ({getStarship, getStarshipImage}) => ({
   getItemImageUrl: getStarshipImage,
 });
 
-export default withApiService(StarshipDetails, mapMethodsToProps);
+export default withApiService(mapMethodsToProps)(StarshipDetails);
 

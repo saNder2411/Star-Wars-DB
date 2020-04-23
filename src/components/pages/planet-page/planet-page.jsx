@@ -1,33 +1,25 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import './planet-page.css';
 
 import Row from '../../row/row';
 import ErrorBoundary from '../../error-boundary/error-boundary';
-import {PlanetList} from '../../api-components/item-list';
+import {PlanetList} from '../../api-components/item-lists';
 import PlanetDetails from '../../api-components/planet-details';
+import withSelectedItem from '../../../hocs/with-selected-item/with-selected-item';
 
+const PlanetPage = ({itemId, onItemSelected}) => {
 
-export default class PlanetPage extends PureComponent {
+  return (
+    <Row>
+      <ErrorBoundary>
+        <PlanetList onItemSelected={onItemSelected} />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <PlanetDetails itemId={itemId} />
+      </ErrorBoundary>
+    </Row>
+  );
+};
 
-  state = {selectedItem: null};
-
-  _handleItemSelected = (id) => {
-    this.setState({selectedItem: id});
-  };
-
-  render() {
-    const {selectedItem} = this.state;
-
-    return (
-      <Row>
-        <ErrorBoundary>
-          <PlanetList onItemSelected={this._handleItemSelected} />
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <PlanetDetails itemId={selectedItem} />
-        </ErrorBoundary>
-      </Row>
-    );
-  }
-}
+export default withSelectedItem(PlanetPage);
 

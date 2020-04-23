@@ -1,33 +1,25 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import './people-page.css';
 
 import Row from '../../row/row';
 import ErrorBoundary from '../../error-boundary/error-boundary';
-import {PersonList} from '../../api-components/item-list';
+import {PersonList} from '../../api-components/item-lists';
 import PersonDetails from '../../api-components/person-details';
+import withSelectedItem from '../../../hocs/with-selected-item/with-selected-item';
 
 
-export default class PeoplePage extends PureComponent {
+const PeoplePage = ({itemId, onItemSelected}) => {
 
-  state = {selectedItem: null};
+  return (
+    <Row>
+      <ErrorBoundary>
+        <PersonList onItemSelected={onItemSelected} />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <PersonDetails itemId={itemId} />
+      </ErrorBoundary>
+    </Row>
+  );
+};
 
-  _handleItemSelected = (id) => {
-    this.setState({selectedItem: id});
-  };
-
-  render() {
-    const {selectedItem} = this.state;
-
-    return (
-      <Row>
-        <ErrorBoundary>
-          <PersonList onItemSelected={this._handleItemSelected} />
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <PersonDetails itemId={selectedItem} />
-        </ErrorBoundary>
-      </Row>
-    );
-  }
-}
-
+export default withSelectedItem(PeoplePage);

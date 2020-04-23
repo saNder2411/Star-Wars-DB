@@ -22,4 +22,4 @@ const mapMethodsToProps = ({getPlanet, getPlanetImage}) => ({
 
 
 
-export default withApiService(PlanetDetails, mapMethodsToProps);
+export default withApiService(mapMethodsToProps)(PlanetDetails);

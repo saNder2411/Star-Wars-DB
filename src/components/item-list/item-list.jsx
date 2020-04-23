@@ -24,4 +24,8 @@ const ItemList = ({data, onItemSelected, children: renderLabel}) => {
   );
 };
 
+ItemList.defaultProps = {
+  onItemSelected: () => {},
+}
+
 export default ItemList;

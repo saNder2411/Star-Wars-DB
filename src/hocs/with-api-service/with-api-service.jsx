@@ -1,7 +1,7 @@
 import React from 'react';
 import {ApiServiceConsumer} from '../../components/api-service-context/api-service-context';
 
-const withApiService = (Component, mapMethodsToProps) => {
+const withApiService = (mapMethodsToProps) => (Component) => {
   return (props) => (
     <ApiServiceConsumer>
       {

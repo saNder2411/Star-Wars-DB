@@ -1,32 +1,25 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import './starships-page.css';
 
 import Row from '../../row/row';
 import ErrorBoundary from '../../error-boundary/error-boundary';
-import {StarshipList} from '../../api-components/item-list';
+import {StarshipList} from '../../api-components/item-lists';
 import StarshipDetails from '../../api-components/starship-details';
+import withSelectedItem from '../../../hocs/with-selected-item/with-selected-item';
 
 
-export default class StarshipsPage extends PureComponent {
+const StarshipsPage = ({itemId, onItemSelected}) => {
 
-  state = {selectedItem: null};
+  return (
+    <Row>
+      <ErrorBoundary>
+        <StarshipList onItemSelected={onItemSelected} />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <StarshipDetails itemId={itemId} />
+      </ErrorBoundary>
+    </Row>
+  );
+};
 
-  _handleItemSelected = (id) => {
-    this.setState({selectedItem: id});
-  };
-
-  render() {
-    const {selectedItem} = this.state;
-
-    return (
-      <Row>
-        <ErrorBoundary>
-          <StarshipList onItemSelected={this._handleItemSelected} />
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <StarshipDetails itemId={selectedItem} />
-        </ErrorBoundary>
-      </Row>
-    );
-  }
-}
+export default withSelectedItem(StarshipsPage);
