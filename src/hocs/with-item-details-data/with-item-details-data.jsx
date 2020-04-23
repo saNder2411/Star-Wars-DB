@@ -1,26 +1,36 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {getContent} from '../../utils/utils';
 
 
 const withItemDetailsData = (Component) => {
+
   class WithItemDetailsData extends PureComponent {
+
+    static propTypes = {
+      itemId: PropTypes.string,
+      getItemDetailsData: PropTypes.func.isRequired,
+      getItemImageUrl: PropTypes.func.isRequired,
+      children: PropTypes.arrayOf(PropTypes.node.isRequired).isRequired,
+    };
+
     state = {
       data: null,
       loading: true,
       error: false,
     };
-  
+
     componentDidMount() {
       this._updateItem();
     }
-  
+
     componentDidUpdate(prevProps) {
       if (prevProps.itemId !== this.props.itemId ||
         prevProps.getItemDetailsData !== this.props.getItemDetailsData) {
         this._updateItem();
       }
     }
-  
+
     _updateItem() {
       const {itemId, getItemDetailsData, getItemImageUrl} = this.props;
   
@@ -36,7 +46,7 @@ const withItemDetailsData = (Component) => {
           }))
         .catch(() => this.setState({error: true, loading: false}));
     }
-  
+
     render() {
       const {data, loading, error} = this.state;
   

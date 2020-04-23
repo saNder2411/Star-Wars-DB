@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './people-page.css';
 
 import Row from '../../row/row';
@@ -20,6 +21,11 @@ const PeoplePage = ({itemId, onItemSelected}) => {
       </ErrorBoundary>
     </Row>
   );
+};
+
+PeoplePage.propTypes = {
+  itemId: PropTypes.string,
+  onItemSelected: PropTypes.func.isRequired,
 };
 
 export default withSelectedItem(PeoplePage);

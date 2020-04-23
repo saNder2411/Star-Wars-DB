@@ -3,10 +3,10 @@ import ItemDetails, {ItemField} from '../item-details/item-details';
 import withItemDetailsData from '../../hocs/with-item-details-data/with-item-details-data';
 import withApiService from '../../hocs/with-api-service/with-api-service';
 
+
 const WrappedItemDetails = withItemDetailsData(ItemDetails);
 
 const PersonDetails = (props) => {
-
 
   return (
     <WrappedItemDetails {...props}>
@@ -21,7 +21,5 @@ const mapMethodsToProps = ({getPerson, getPersonImage}) => ({
   getItemDetailsData: getPerson,
   getItemImageUrl: getPersonImage,
 });
-
-
 
 export default withApiService(mapMethodsToProps)(PersonDetails);

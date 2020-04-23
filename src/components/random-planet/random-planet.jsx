@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './random-planet.css';
+
 
 const RandomPlanet = ({data, children}) => {
   const {imageUrl, name} = data;
+
   return (
     <React.Fragment>
       <img className="planet-image"
@@ -18,6 +21,11 @@ const RandomPlanet = ({data, children}) => {
       </div>
     </React.Fragment>
   );
+};
+
+RandomPlanet.propTypes = {
+  data: PropTypes.object,
+  children: PropTypes.arrayOf(PropTypes.node.isRequired).isRequired,
 };
 
 export default RandomPlanet;

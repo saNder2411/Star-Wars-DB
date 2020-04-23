@@ -5,6 +5,7 @@ import withApiService from '../../hocs/with-api-service/with-api-service';
 import withChildFunction from '../../hocs/with-child-function/with-child-function';
 import compose from '../../hocs/compose/compose';
 
+
 const renderName = ({name}) => <span>{name}</span>;
 const renderNameAndModel = ({name, model}) => <span>{name} ({model})</span>;
 

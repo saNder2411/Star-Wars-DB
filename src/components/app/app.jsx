@@ -14,7 +14,9 @@ import PlanetPage from '../pages/planet-page/planet-page';
 import ErrorBoundary from '../error-boundary/error-boundary';
 
 export default class App extends PureComponent {
+
   _DummyApiService = DummyApiService;
+
   _ApiService = ApiService;
 
   state = {

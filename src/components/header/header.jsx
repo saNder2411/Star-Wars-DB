@@ -1,7 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './header.css';
 
+
 const Header = ({onServiceChange}) => {
+
   return (
     <nav className="header d-flex navbar navbar-expand-lg navbar-dark bg-info">
       <a className="navbar-brand" href="/">Star Wars DB</a>
@@ -30,5 +33,7 @@ const Header = ({onServiceChange}) => {
     </nav>
   );
 };
+
+Header.propTypes = {onServiceChange: PropTypes.func.isRequired};
 
 export default Header;

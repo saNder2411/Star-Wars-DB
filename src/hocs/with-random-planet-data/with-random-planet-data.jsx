@@ -1,22 +1,31 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {getContent} from '../../utils/utils';
+
 
 const withRandomPlanetData = (Component) => {
 
   class WithRandomPlanetData extends PureComponent {
 
     static defaultProps = {
-      updateInterval: 10000,
+      updateInterval: 30000,
+    };
+
+    static propTypes = {
+      updateInterval: PropTypes.number,
+      getPlanet: PropTypes.func.isRequired,
+      getPlanetImage: PropTypes.func.isRequired,
+      children: PropTypes.arrayOf(PropTypes.node.isRequired).isRequired,
     };
 
     _interval = null;
-  
+
     state = {
       data: null,
       loading: true,
       error: false,
     };
-  
+
     componentDidMount() {
       const {updateInterval} = this.props;
       this._updatePlanet();

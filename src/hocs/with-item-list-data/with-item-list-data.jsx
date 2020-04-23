@@ -1,14 +1,20 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {getContent} from '../../utils/utils';
 
+
 const withItemListData = (Component) => {
+
   class WithItemListData extends PureComponent {
+
+    static propTypes = {getData: PropTypes.func.isRequired};
+
     state = {
       data: null,
       loading: true,
       error: false,
     };
-  
+
     componentDidMount() {
       this._updateItemList();
     }
@@ -29,7 +35,7 @@ const withItemListData = (Component) => {
     render() {
       const {data, loading, error} = this.state;
       const content = getContent(loading, error, React.memo(Component), {...this.props, data});
-  
+
       return content
     }
   }

@@ -3,6 +3,7 @@ import ItemDetails, {ItemField} from '../item-details/item-details';
 import withItemDetailsData from '../../hocs/with-item-details-data/with-item-details-data';
 import withApiService from '../../hocs/with-api-service/with-api-service';
 
+
 const WrappedItemDetails = withItemDetailsData(ItemDetails);
 
 const StarshipDetails = (props) => {

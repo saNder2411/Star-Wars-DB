@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import './error-button.css';
 
+
 export default class ErrorButton extends PureComponent {
 
   state = {

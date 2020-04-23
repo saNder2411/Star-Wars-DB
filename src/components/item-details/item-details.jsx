@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './item-details.css';
 import ErrorButton from '../error-button/error-button';
 
@@ -25,6 +26,14 @@ const ItemDetails = ({data, children}) => {
   );
 };
 
+ItemDetails.propTypes = {
+  data: PropTypes.shape({
+    imageUrl: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  children: PropTypes.arrayOf(PropTypes.node.isRequired).isRequired,
+};
+
 const ItemField = ({data, field, label}) => {
   return (
     <li className="list-group-item d-flex justify-content-between align-items-center">
@@ -32,6 +41,12 @@ const ItemField = ({data, field, label}) => {
       <span>{data[field]}</span>
     </li>
   );
+};
+
+ItemField.propTypes = {
+  data: PropTypes.object,
+  field: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default ItemDetails;
