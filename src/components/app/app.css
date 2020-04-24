@@ -19,3 +19,8 @@
   padding: .5rem;
   padding-left: 10rem;
 }
+
+.app .app-title {
+  text-align: center;
+  padding: .5rem;
+}

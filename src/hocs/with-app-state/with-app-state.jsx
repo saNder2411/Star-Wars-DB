@@ -13,6 +13,7 @@ const withAppState = (Component) => {
     state = {
       apiService: new this._ApiService(),
       hasError: false,
+      isLoggedIn: false,
     };
   
     componentDidCatch() {
@@ -27,9 +28,13 @@ const withAppState = (Component) => {
       });
     };
 
+    _handleLoginClick = () => {
+      this.setState({isLoggedIn: true});
+    };
+
     render() {
   
-      return <Component {...this.state} {...this.props} onServiceChange={this._handleServiceChangeClick} />;
+      return <Component {...this.state} {...this.props} onServiceChange={this._handleServiceChangeClick} onLogin={this._handleLoginClick} />;
     }
   }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './item-details.css';
-import ErrorButton from '../error-button/error-button';
 
 
 const ItemDetails = ({data, children}) => {
@@ -20,7 +19,6 @@ const ItemDetails = ({data, children}) => {
             .Children
             .map(children, (child) => React.cloneElement(child, {data}))}
         </ul>
-        <ErrorButton />
       </div>
     </React.Fragment>
   );
