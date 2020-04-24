@@ -1,24 +1,22 @@
-import React, {PureComponent} from 'react';
+import React, {useState} from 'react';
 import './error-button.css';
 
 
-export default class ErrorButton extends PureComponent {
+const ErrorButton = () => {
 
-  state = {
-    renderError: false
-  };
+const [hasError, setHasError] = useState(false);
 
-  render() {
-    if (this.state.renderError) {
-      this.foo.bar = 0;
-    }
-
-    return (
-      <button
-        className="error-button btn btn-danger btn-lg"
-        onClick={() => this.setState({renderError: true})}>
-        Throw Error
-      </button>
-    );
+  if (hasError) {
+    this.foo.bar = 0;
   }
-}
+
+  return (
+    <button
+      className="error-button btn btn-danger btn-lg"
+      onClick={() => setHasError(true)}>
+      Throw Error
+    </button>
+  );
+};
+
+export default ErrorButton

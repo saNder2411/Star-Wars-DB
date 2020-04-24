@@ -1,8 +1,7 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './app.css';
 
-import ApiService from '../../services/api-service';
-import DummyApiService from '../../services/dummy-api-service';
 import {ApiServiceProvider} from '../api-service-context/api-service-context';
 import Header from '../header/header';
 import RandomPlanetDetails from '../api-components/random-planet-details';
@@ -12,54 +11,38 @@ import PeoplePage from '../pages/people-page/people-page';
 import StarshipsPage from '../pages/starships-page/starships-page';
 import PlanetPage from '../pages/planet-page/planet-page';
 import ErrorBoundary from '../error-boundary/error-boundary';
+import withAppState from '../../hocs/with-app-state/with-app-state';
 
-export default class App extends PureComponent {
+const App = ({apiService, hasError, onServiceChange}) => {
 
-  _DummyApiService = DummyApiService;
-
-  _ApiService = ApiService;
-
-  state = {
-    apiService: new this._ApiService(),
-    hasError: false,
-  };
-
-  componentDidCatch() {
-    this.setState({hasError: true});
+  if (hasError) {
+    return <ErrorIndicator />
   }
 
-  _handleServiceChangeClick = () => {
-    this.setState((prevState) => {
-      const Service = prevState.apiService instanceof this._ApiService ? this._DummyApiService : this._ApiService;
+  return (
+    <ErrorBoundary>
+      <ApiServiceProvider value={apiService} >
+        <div className="app">
+          <Header onServiceChange={onServiceChange} />
+          <RandomPlanetDetails />
 
-      return {apiService: new Service()};
-    });
-  };
-
-  render() {
-    const {apiService, hasError} = this.state;
-
-    if (hasError) {
-      return <ErrorIndicator />
-    }
-
-    return (
-      <ErrorBoundary>
-        <ApiServiceProvider value={apiService} >
-          <div className="app">
-            <Header onServiceChange={this._handleServiceChangeClick} />
-            <RandomPlanetDetails />
-
-            <div className="row mb2 button-row">
-              <ErrorButton />
-            </div>
-
-            <PeoplePage />
-            <PlanetPage />
-            <StarshipsPage />
+          <div className="row mb2 button-row">
+            <ErrorButton />
           </div>
-        </ApiServiceProvider>
-      </ErrorBoundary>
-    );
-  }
+
+          <PeoplePage />
+          <PlanetPage />
+          <StarshipsPage />
+        </div>
+      </ApiServiceProvider>
+    </ErrorBoundary>
+  );
+};
+
+App.propTypes = {
+  apiService: PropTypes.object.isRequired,
+  hasError: PropTypes.bool.isRequired,
+  onServiceChange: PropTypes.func.isRequired,
 }
+
+export default withAppState(App);

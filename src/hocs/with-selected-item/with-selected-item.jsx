@@ -1,26 +1,13 @@
-import React, {PureComponent} from 'react';
+import React, {useState} from 'react';
 
 
 const withSelectedItem = (Component) => {
 
-  class WithSelectedItem extends PureComponent {
+  return (props) => {
+    const [selectedItemId, setSelectedItemId] = useState(null);
 
-    state = {selectedItem: null};
-  
-    _handleItemSelected = (id) => {
-      this.setState({selectedItem: id});
-    };
-
-    render() {
-      const {selectedItem} = this.state;
-
-      return <Component {...this.props} itemId={selectedItem} onItemSelected={this._handleItemSelected} />
-    }
-  }
-
-  return WithSelectedItem;
-}
-
-
+    return <Component {...props} itemId={selectedItemId} onItemSelected={setSelectedItemId} />
+  };
+};
 
 export default withSelectedItem;
