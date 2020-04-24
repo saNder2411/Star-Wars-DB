@@ -6,27 +6,31 @@ import Row from '../../row/row';
 import ErrorBoundary from '../../error-boundary/error-boundary';
 import {PlanetList} from '../../api-components/item-lists';
 import PlanetDetails from '../../api-components/planet-details';
-import withSelectedItem from '../../../hocs/with-selected-item/with-selected-item';
+import {withRouter} from 'react-router-dom';
 
 
-const PlanetPage = ({itemId, onItemSelected}) => {
+const PlanetPage = ({history, match}) => {
+  const {id} = match.params;
 
   return (
-    <Row>
-      <ErrorBoundary>
-        <PlanetList onItemSelected={onItemSelected} />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <PlanetDetails itemId={itemId} />
-      </ErrorBoundary>
-    </Row>
+    <React.Fragment>
+      <h2>Planets</h2>
+      <Row>
+        <ErrorBoundary>
+          <PlanetList onItemSelected={(id) => history.push(id)} />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <PlanetDetails itemId={id} />
+        </ErrorBoundary>
+      </Row>
+    </React.Fragment>
   );
 };
 
 PlanetPage.propTypes = {
-  itemId: PropTypes.string,
-  onItemSelected: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
-export default withSelectedItem(PlanetPage);
+export default withRouter(PlanetPage);
 

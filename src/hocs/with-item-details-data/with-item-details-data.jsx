@@ -52,8 +52,8 @@ const withItemDetailsData = (Component) => {
   
       if (data === null) {
         return (
-          <div className="person-details card">
-            <span>Selected a person from a list</span>
+          <div className="item-details card">
+            <span>Selected a item from a list</span>
           </div>
         );
       }
@@ -62,7 +62,7 @@ const withItemDetailsData = (Component) => {
       const content = getContent(loading, error, React.memo(Component), {data, children});
 
       return (
-        <div className="person-details card">
+        <div className="item-details card">
           {content}
         </div>
       );

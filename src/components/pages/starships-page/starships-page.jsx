@@ -2,30 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './starships-page.css';
 
-import Row from '../../row/row';
 import ErrorBoundary from '../../error-boundary/error-boundary';
 import {StarshipList} from '../../api-components/item-lists';
-import StarshipDetails from '../../api-components/starship-details';
-import withSelectedItem from '../../../hocs/with-selected-item/with-selected-item';
+import {withRouter} from 'react-router-dom';
 
 
-const StarshipsPage = ({itemId, onItemSelected}) => {
+const StarshipsPage = ({history}) => {
 
   return (
-    <Row>
+    <React.Fragment>
+      <h2>Starships</h2>
       <ErrorBoundary>
-        <StarshipList onItemSelected={onItemSelected} />
+        <StarshipList onItemSelected={(id) => history.push(id)} />
       </ErrorBoundary>
-      <ErrorBoundary>
-        <StarshipDetails itemId={itemId} />
-      </ErrorBoundary>
-    </Row>
+    </React.Fragment>
   );
 };
 
 StarshipsPage.propTypes = {
-  itemId: PropTypes.string,
-  onItemSelected: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired, 
 };
 
-export default withSelectedItem(StarshipsPage);
+export default withRouter(StarshipsPage);

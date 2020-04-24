@@ -9,7 +9,7 @@ const ItemDetails = ({data, children}) => {
 
   return (
     <React.Fragment>
-      <img className="person-image"
+      <img className="item-image"
             src={imageUrl}
             alt="item" />
 

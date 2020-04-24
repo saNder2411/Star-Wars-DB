@@ -6,26 +6,31 @@ import Row from '../../row/row';
 import ErrorBoundary from '../../error-boundary/error-boundary';
 import {PersonList} from '../../api-components/item-lists';
 import PersonDetails from '../../api-components/person-details';
-import withSelectedItem from '../../../hocs/with-selected-item/with-selected-item';
+import {withRouter} from 'react-router-dom';
 
 
-const PeoplePage = ({itemId, onItemSelected}) => {
+const PeoplePage = ({history, match}) => {
+  const {id} = match.params;
 
   return (
-    <Row>
-      <ErrorBoundary>
-        <PersonList onItemSelected={onItemSelected} />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <PersonDetails itemId={itemId} />
-      </ErrorBoundary>
-    </Row>
+    <React.Fragment>
+      <h2>People</h2>
+      <Row>
+        <ErrorBoundary>
+          <PersonList onItemSelected={(id) => history.push(id)} />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <PersonDetails itemId={id} />
+        </ErrorBoundary>
+      </Row>
+    </React.Fragment>
+   
   );
 };
 
 PeoplePage.propTypes = {
-  itemId: PropTypes.string,
-  onItemSelected: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
-export default withSelectedItem(PeoplePage);
+export default withRouter(PeoplePage);
