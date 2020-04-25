@@ -11,7 +11,8 @@ const RandomPlanet = ({data, children}) => {
       <img className="planet-image"
               src={imageUrl}
               alt="random planet"/>
-      <div>
+
+      <div className="card-body">
         <h4>{name}</h4>
         <ul className="list-group">
           {React

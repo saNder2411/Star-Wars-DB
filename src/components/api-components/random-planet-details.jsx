@@ -12,7 +12,11 @@ const RandomPlanetDetails = (props) => {
   return (
     <WrappedRandomPlanet {...props}>
       <ItemField field="population" label="Population" />
+      <ItemField field="climate" label="Climate" />
+      <ItemField field="terrain" label="Terrain" />
+      <ItemField field="gravity" label="Gravity" />
       <ItemField field="rotationPeriod" label="Rotation Period" />
+      <ItemField field="orbitalPeriod" label="Orbital Period" />
       <ItemField field="diameter" label="Diameter" />
     </WrappedRandomPlanet>
   );

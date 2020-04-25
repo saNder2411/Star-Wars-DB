@@ -10,9 +10,15 @@ const StarshipDetails = (props) => {
 
   return (
     <WrappedItemDetails {...props}>
+      <ItemField field="starshipClass" label="Starship Class" />
       <ItemField field="model" label="Model" />
       <ItemField field="length" label="Length" />
+      <ItemField field="manufacturer" label="Manufacturer" />
       <ItemField field="costInCredits" label="Cost" />
+      <ItemField field="consumables" label="Consumables" />
+      <ItemField field="crew" label="Crew" />
+      <ItemField field="passengers" label="Passengers" />
+      <ItemField field="cargoCapacity" label="Cargo Capacity" />
     </WrappedItemDetails>
   );
 };

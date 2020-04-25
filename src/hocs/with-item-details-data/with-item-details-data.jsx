@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, memo} from 'react';
 import PropTypes from 'prop-types';
 import {getContent} from '../../utils/utils';
 
@@ -34,7 +34,7 @@ const withItemDetailsData = (Component) => {
     _updateItem() {
       const {itemId, getItemDetailsData, getItemImageUrl} = this.props;
   
-      if (itemId === null) {
+      if (!itemId) {
         return;
       }
 
@@ -50,7 +50,7 @@ const withItemDetailsData = (Component) => {
     render() {
       const {data, loading, error} = this.state;
   
-      if (data === null) {
+      if (!data) {
         return (
           <div className="item-details card">
             <span>Selected a item from a list</span>
@@ -59,7 +59,7 @@ const withItemDetailsData = (Component) => {
       }
 
       const {children} = this.props;
-      const content = getContent(loading, error, React.memo(Component), {data, children});
+      const content = getContent(loading, error, memo(Component), {data, children});
 
       return (
         <div className="item-details card">

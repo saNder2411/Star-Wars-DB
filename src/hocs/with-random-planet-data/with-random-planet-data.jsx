@@ -8,7 +8,7 @@ const withRandomPlanetData = (Component) => {
   class WithRandomPlanetData extends PureComponent {
 
     static defaultProps = {
-      updateInterval: 30000,
+      updateInterval: 20000,
     };
 
     static propTypes = {
