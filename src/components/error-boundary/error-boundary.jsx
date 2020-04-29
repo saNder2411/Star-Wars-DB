@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import './error-boundary.css';
 import ErrorIndicator from '../error-indicator/error-indicator';
+import './error-boundary.css';
 
 
 export default class ErrorBoundary extends PureComponent {

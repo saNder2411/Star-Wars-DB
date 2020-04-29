@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './starships-page.css';
+import {withRouter} from 'react-router-dom';
 
 import ErrorBoundary from '../../error-boundary/error-boundary';
 import {StarshipList} from '../../api-components/item-lists';
-import {withRouter} from 'react-router-dom';
+
+import './starships-page.css';
 
 
 const StarshipsPage = ({history}) => {

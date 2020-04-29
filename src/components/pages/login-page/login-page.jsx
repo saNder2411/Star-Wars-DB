@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './login-page.css';
 import {Redirect} from 'react-router-dom';
+import './login-page.css';
 
 const LoginPage = ({isLoggedIn, onLogin}) => {
   

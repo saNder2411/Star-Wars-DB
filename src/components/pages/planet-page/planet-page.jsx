@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './planet-page.css';
+import {withRouter} from 'react-router-dom';
 
 import Row from '../../row/row';
 import ErrorBoundary from '../../error-boundary/error-boundary';
 import {PlanetList} from '../../api-components/item-lists';
 import PlanetDetails from '../../api-components/planet-details';
-import {withRouter} from 'react-router-dom';
+
+import './planet-page.css';
 
 
 const PlanetPage = ({history, match}) => {

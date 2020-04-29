@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './secret-page.css';
 import {Redirect} from 'react-router-dom';
+import './secret-page.css';
 
 const SecretPage = ({isLoggedIn}) => {
   

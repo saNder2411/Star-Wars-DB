@@ -1,7 +1,6 @@
 import React from 'react';
-
-import Spinner from "../components/spinner/spinner";
-import ErrorIndicator from "../components/error-indicator/error-indicator";
+import Spinner from '../components/spinner/spinner';
+import ErrorIndicator from '../components/error-indicator/error-indicator';
 
 
 export const getContent = (loading, error, Component, props) => {

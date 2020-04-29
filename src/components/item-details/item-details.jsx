@@ -47,5 +47,5 @@ ItemField.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-export default ItemDetails;
 export {ItemField};
+export default ItemDetails;

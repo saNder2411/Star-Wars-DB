@@ -1,7 +1,6 @@
 import React from 'react';
-
-import './error-indicator.css';
 import icon from './death-star.png';
+import './error-indicator.css';
 
 
 const ErrorIndicator = () => {

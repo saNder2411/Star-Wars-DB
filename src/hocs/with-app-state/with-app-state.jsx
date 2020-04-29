@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
-
 import ApiService from '../../services/api-service';
 import DummyApiService from '../../services/dummy-api-service';
+
 
 const withAppState = (Component) => {
   class WithAppState extends PureComponent {

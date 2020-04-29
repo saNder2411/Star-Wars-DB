@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './app.css';
-import './bootstrap.min.css';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import {ApiServiceProvider} from '../api-service-context/api-service-context';
 import Header from '../header/header';
@@ -13,9 +12,12 @@ import StarshipDetails from '../api-components/starship-details';
 import PlanetPage from '../pages/planet-page/planet-page';
 import ErrorBoundary from '../error-boundary/error-boundary';
 import withAppState from '../../hocs/with-app-state/with-app-state';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import SecretPage from '../pages/secret-page/secret-page';
 import LoginPage from '../pages/login-page/login-page';
+
+import './app.css';
+import './bootstrap.min.css';
+
 
 const App = ({apiService, hasError, isLoggedIn, onServiceChange, onLogin}) => {
 
