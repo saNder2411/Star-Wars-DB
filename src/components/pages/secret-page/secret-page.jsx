@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import './secret-page.css';
 
+
 const SecretPage = ({isLoggedIn}) => {
-  
+
   if (isLoggedIn) {
     return (
       <div className="secret-page jumbotron text-center">
@@ -18,4 +19,4 @@ const SecretPage = ({isLoggedIn}) => {
 
 SecretPage.propTypes = {isLoggedIn: PropTypes.bool.isRequired};
 
-export default SecretPage; 
+export default SecretPage;

@@ -17,7 +17,7 @@ import './bootstrap.min.css';
 const App = ({apiService, hasError, isLoggedIn, onServiceChange, onLogin}) => {
 
   if (hasError) {
-    return <ErrorIndicator />
+    return <ErrorIndicator />;
   }
 
   return (
@@ -36,11 +36,28 @@ const App = ({apiService, hasError, isLoggedIn, onServiceChange, onLogin}) => {
 };
 
 App.propTypes = {
-  apiService: PropTypes.object.isRequired,
+  apiService: PropTypes.shape({
+    _apiBaseUrl: PropTypes.string,
+    _imageBaseUrl: PropTypes.string,
+    getResource: PropTypes.func,
+    getAllPeople: PropTypes.func,
+    getPerson: PropTypes.func,
+    getAllPlanets: PropTypes.func,
+    getPlanet: PropTypes.func,
+    getAllStarships: PropTypes.func,
+    getStarship: PropTypes.func,
+    getPersonImage: PropTypes.func,
+    getStarshipImage: PropTypes.func,
+    getPlanetImage: PropTypes.func,
+    _extractId: PropTypes.func,
+    _transformPlanet: PropTypes.func,
+    _transformStarship: PropTypes.func,
+    _transformPerson: PropTypes.func,
+  }).isRequired,
   hasError: PropTypes.bool.isRequired,
   onServiceChange: PropTypes.func.isRequired,
   onLogin: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-}
+};
 
 export default withAppState(App);

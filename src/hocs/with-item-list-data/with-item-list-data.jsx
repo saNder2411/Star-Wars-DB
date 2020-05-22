@@ -20,14 +20,18 @@ const withItemListData = (Component) => {
     }
 
     componentDidUpdate(prevProps) {
-      if (prevProps.getData !== this.props.getData) {
+      const {getData} = this.props;
+
+      if (prevProps.getData !== getData) {
         this._updateItemList();
       }
     }
 
     _updateItemList() {
-      this.setState({error: false, loading: true})
-      this.props.getData()
+      const {getData} = this.props;
+
+      this.setState({error: false, loading: true});
+      getData()
         .then((data) => this.setState({data, loading: false}))
         .catch(() => this.setState({error: true, loading: false}));
     }
@@ -36,11 +40,12 @@ const withItemListData = (Component) => {
       const {data, loading, error} = this.state;
       const content = getContent(loading, error, React.memo(Component), {...this.props, data});
 
-      return content
+      return content;
     }
+
   }
 
   return WithItemListData;
-}
+};
 
 export default withItemListData;

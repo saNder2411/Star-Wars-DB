@@ -13,6 +13,7 @@ const PagesPathname = {
 };
 
 const Header = ({onServiceChange, location}) => {
+
   const {pathname} = location;
 
   return (
@@ -37,13 +38,19 @@ const Header = ({onServiceChange, location}) => {
           <Link className="nav-link" to="/login">Login</Link>
         </li>
       </ul>
-      <button className="btn btn-warning btn-sm" onClick={onServiceChange}>
+      <button
+        onClick={onServiceChange}
+        className="btn btn-warning btn-sm"
+        type="button">
         Change Service
       </button>
     </nav>
   );
 };
 
-Header.propTypes = {onServiceChange: PropTypes.func.isRequired};
+Header.propTypes = {
+  onServiceChange: PropTypes.func.isRequired,
+  location: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default withRouter(Header);

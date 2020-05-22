@@ -4,13 +4,15 @@ import './item-details.css';
 
 
 const ItemDetails = ({data, children}) => {
+
   const {imageUrl, name} = data;
 
   return (
-    <React.Fragment>
-      <img className="item-image"
-            src={imageUrl}
-            alt="item" />
+    <>
+      <img
+        className="item-image"
+        src={imageUrl}
+        alt="item" />
 
       <div className="card-body">
         <h4>{name}</h4>
@@ -20,7 +22,7 @@ const ItemDetails = ({data, children}) => {
             .map(children, (child) => React.cloneElement(child, {data}))}
         </ul>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -33,6 +35,7 @@ ItemDetails.propTypes = {
 };
 
 const ItemField = ({data, field, label}) => {
+
   return (
     <li className="list-group-item d-flex justify-content-between align-items-center">
       <span className="term">{label}:</span>
@@ -41,8 +44,12 @@ const ItemField = ({data, field, label}) => {
   );
 };
 
+ItemField.defaultProps = {
+  data: undefined,
+};
+
 ItemField.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.objectOf(PropTypes.string),
   field: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 };

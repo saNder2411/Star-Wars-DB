@@ -11,10 +11,11 @@ import './people-page.css';
 
 
 const PeoplePage = ({history, match}) => {
+
   const {id} = match.params;
 
   return (
-    <React.Fragment>
+    <>
       <h2>People</h2>
       <Row>
         <ErrorBoundary>
@@ -24,14 +25,14 @@ const PeoplePage = ({history, match}) => {
           <PersonDetails itemId={id} />
         </ErrorBoundary>
       </Row>
-    </React.Fragment>
-   
+    </>
+
   );
 };
 
 PeoplePage.propTypes = {
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  history: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.object]).isRequired,
+  match: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool, PropTypes.object]).isRequired,
 };
 
 export default withRouter(PeoplePage);

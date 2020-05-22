@@ -7,6 +7,10 @@ const withItemDetailsData = (Component) => {
 
   class WithItemDetailsData extends PureComponent {
 
+    static defaultProps = {
+      itemId: undefined,
+    };
+
     static propTypes = {
       itemId: PropTypes.string,
       getItemDetailsData: PropTypes.func.isRequired,
@@ -25,15 +29,16 @@ const withItemDetailsData = (Component) => {
     }
 
     componentDidUpdate(prevProps) {
-      if (prevProps.itemId !== this.props.itemId ||
-        prevProps.getItemDetailsData !== this.props.getItemDetailsData) {
+      const {itemId, getItemDetailsData} = this.props;
+
+      if (prevProps.itemId !== itemId || prevProps.getItemDetailsData !== getItemDetailsData) {
         this._updateItem();
       }
     }
 
     _updateItem() {
       const {itemId, getItemDetailsData, getItemImageUrl} = this.props;
-  
+
       if (!itemId) {
         return;
       }
@@ -41,15 +46,15 @@ const withItemDetailsData = (Component) => {
       this.setState({error: false, loading: true});
       getItemDetailsData(itemId)
         .then((data) => this.setState({
-            data: {...data, imageUrl: getItemImageUrl(data)},
-            loading: false,
-          }))
+          data: {...data, imageUrl: getItemImageUrl(data)},
+          loading: false,
+        }))
         .catch(() => this.setState({error: true, loading: false}));
     }
 
     render() {
       const {data, loading, error} = this.state;
-  
+
       if (!data) {
         return (
           <div className="item-details card">
@@ -67,6 +72,7 @@ const withItemDetailsData = (Component) => {
         </div>
       );
     }
+
   }
 
   return WithItemDetailsData;

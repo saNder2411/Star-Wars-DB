@@ -29,4 +29,3 @@ const mapMethodsToProps = ({getStarship, getStarshipImage}) => ({
 });
 
 export default withApiService(mapMethodsToProps)(StarshipDetails);
-

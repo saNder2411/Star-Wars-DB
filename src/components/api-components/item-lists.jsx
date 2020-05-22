@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ItemList from '../item-list/item-list';
 import withItemListData from '../../hocs/with-item-list-data/with-item-list-data';
 import withApiService from '../../hocs/with-api-service/with-api-service';
@@ -16,16 +17,28 @@ const mapPlanetListMethodsToProps = ({getAllPlanets}) => ({getData: getAllPlanet
 const PersonList = compose(
   withApiService(mapPersonListMethodsToProps),
   withItemListData,
-  withChildFunction(renderName))(ItemList);
+  withChildFunction(renderName),
+)(ItemList);
 
 const StarshipList = compose(
   withApiService(mapStarshipListMethodsToProps),
   withItemListData,
-  withChildFunction(renderNameAndModel))(ItemList);
+  withChildFunction(renderNameAndModel),
+)(ItemList);
 
 const PlanetList = compose(
   withApiService(mapPlanetListMethodsToProps),
   withItemListData,
-  withChildFunction(renderName))(ItemList);
+  withChildFunction(renderName),
+)(ItemList);
+
+renderNameAndModel.propTypes = {
+  name: PropTypes.string.isRequired,
+  model: PropTypes.string.isRequired,
+};
+
+renderName.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 
 export {PersonList, StarshipList, PlanetList};

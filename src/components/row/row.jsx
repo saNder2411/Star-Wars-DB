@@ -4,6 +4,7 @@ import './row.css';
 
 
 const Row = ({children}) => {
+
   const [left, right] = children;
 
   return (

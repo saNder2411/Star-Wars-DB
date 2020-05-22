@@ -4,10 +4,11 @@ import DummyApiService from '../../services/dummy-api-service';
 
 
 const withAppState = (Component) => {
+
   class WithAppState extends PureComponent {
 
     _DummyApiService = DummyApiService;
-  
+
     _ApiService = ApiService;
 
     state = {
@@ -15,7 +16,7 @@ const withAppState = (Component) => {
       hasError: false,
       isLoggedIn: false,
     };
-  
+
     componentDidCatch() {
       this.setState({hasError: true});
     }
@@ -23,7 +24,7 @@ const withAppState = (Component) => {
     _handleServiceChangeClick = () => {
       this.setState((prevState) => {
         const Service = prevState.apiService instanceof this._ApiService ? this._DummyApiService : this._ApiService;
-  
+
         return {apiService: new Service()};
       });
     };
@@ -33,9 +34,16 @@ const withAppState = (Component) => {
     };
 
     render() {
-  
-      return <Component {...this.state} {...this.props} onServiceChange={this._handleServiceChangeClick} onLogin={this._handleLoginClick} />;
+
+      return (
+        <Component
+          {...this.state}
+          {...this.props}
+          onServiceChange={this._handleServiceChangeClick}
+          onLogin={this._handleLoginClick} />
+      );
     }
+
   }
 
   return WithAppState;

@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const {
-  Provider: ApiServiceProvider, 
+  Provider: ApiServiceProvider,
   Consumer: ApiServiceConsumer,
 } = React.createContext();
 

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import ErrorIndicator from '../error-indicator/error-indicator';
 import './error-boundary.css';
+import ErrorIndicator from '../error-indicator/error-indicator';
 
 
 export default class ErrorBoundary extends PureComponent {
@@ -19,11 +19,14 @@ export default class ErrorBoundary extends PureComponent {
   }
 
   render() {
+    const {hasError} = this.state;
+    const {children} = this.props;
 
-    if (this.state.hasError) {
-      return <ErrorIndicator />
+    if (hasError) {
+      return <ErrorIndicator />;
     }
 
-    return this.props.children;
+    return children;
   }
+
 }

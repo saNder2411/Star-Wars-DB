@@ -8,13 +8,14 @@ const withApiService = (mapMethodsToProps) => (Component) => {
     <ApiServiceConsumer>
       {
         (apiService) => {
+
           const serviceProps = mapMethodsToProps(apiService);
 
           return <Component {...props} {...serviceProps} />;
         }
       }
     </ApiServiceConsumer>
-  )
+  );
 };
 
 export default withApiService;
