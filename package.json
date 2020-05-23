@@ -2,7 +2,7 @@
   "name": "star-db",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://saNder2411.github.io/Star-Wars-DB-React-Context-API",
+  "homepage": "http://saNder2411.github.io/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
