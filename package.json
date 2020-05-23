@@ -2,14 +2,12 @@
   "name": "star-db",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://saNder2411.github.io/Star-Wars-DB-React-Context-API/",
+  "homepage": "/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,7 +40,6 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "gh-pages": "^2.2.0"
+    "eslint-plugin-react-hooks": "^2.5.0"
   }
 }
