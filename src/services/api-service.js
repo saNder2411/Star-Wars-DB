@@ -1,19 +1,29 @@
+import Axios from 'axios';
+
+
 export default class ApiService {
 
   _apiBaseUrl = `https://swapi.dev/api`;
 
   _imageBaseUrl = `https://starwars-visualguide.com/assets/img`;
 
-  getResource = async (url) => {
-    const res = await fetch(`${this._apiBaseUrl}${url}`);
+  _API = Axios.create({
+    baseURL: this._apiBaseUrl,
+    timeout: 1000 * 10,
+    withCredentials: false,
+    headers: {
+      'Content-Type': `application/json`,
+    },
+  })
 
-    if (!res.ok) {
+  getResource = async (url) => {
+    const res = await this._API(url);
+
+    if (res.status !== 200) {
       throw new Error(`Could not fetch ${url}, received ${res.status}`);
     }
 
-    const data = await res.json();
-
-    return data;
+    return res.data;
   };
 
   getAllPeople = async () => {
