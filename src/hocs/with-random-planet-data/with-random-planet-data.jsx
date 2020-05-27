@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {getContent} from '../../utils/utils';
+import getContent from '../../utils/utils';
 
 
 const withRandomPlanetData = (Component) => {
